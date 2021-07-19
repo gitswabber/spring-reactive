@@ -13,6 +13,7 @@ public class HomeController {
     @GetMapping
     Mono<String> home() {
         // It will return template 'home.html' in 'classpath:/templates/' using thymeleaf view resolver.
+        // It can render html file at browser reactively.
         return Mono.just("home");
     }
 }
