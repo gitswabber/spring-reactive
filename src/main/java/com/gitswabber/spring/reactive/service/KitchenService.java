@@ -1,8 +1,9 @@
 package com.gitswabber.spring.reactive.service;
 
-import com.gitswabber.spring.reactive.controller.dto.Dish;
+import com.gitswabber.spring.reactive.controller.flux.dto.Dish;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -19,6 +20,10 @@ public class KitchenService {
     );
 
     private final Random picker = new Random();
+
+    public Mono<Dish> getDish() {
+        return Mono.just(randomDish());
+    }
 
     public Flux<Dish> getDishes() {
         return Flux.<Dish>generate(sink -> sink.next(randomDish()))

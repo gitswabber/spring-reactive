@@ -1,4 +1,4 @@
-package com.gitswabber.spring.reactive.controller.dto;
+package com.gitswabber.spring.reactive.controller.flux.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,11 +1,12 @@
-package com.gitswabber.spring.reactive.controller;
+package com.gitswabber.spring.reactive.controller.flux;
 
-import com.gitswabber.spring.reactive.controller.dto.Dish;
+import com.gitswabber.spring.reactive.controller.flux.dto.Dish;
 import com.gitswabber.spring.reactive.service.KitchenService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class ServerController {
@@ -26,7 +27,13 @@ public class ServerController {
 
     @GetMapping(value = "/served-dishes", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<Dish> deliverDishes() {
-        // It returns result after calling Dish.deliver() and making new response with setting delivered variable as true.
+        // It returns result after calling Dish.deliver() and making new response with setting 'delivered' variable as true.
         return kitchen.getDishes().map(Dish::deliver);
+    }
+
+    @GetMapping(value = "/served-dish", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Mono<Dish> deliverDish() {
+        // It returns result after calling Dish.deliver() and making new response with setting 'delivered' variable as true.
+        return kitchen.getDish().map(Dish::deliver);
     }
 }
